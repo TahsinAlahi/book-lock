@@ -1,13 +1,22 @@
 import HeroSection from "../Components/HeroSection";
 import { useBooks } from "../Contexts/BookContext";
+import BookList from "../Components/BookList";
+import Loader from "../Components/Loader";
 
 function HomePage() {
-  const { allBooks, isLoading } = useBooks();
-  console.log(allBooks);
+  const { isLoading } = useBooks();
+  console.log(isLoading);
 
   return (
     <main className="w-full flex items-center flex-col max-h-full">
-      <HeroSection />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <HeroSection />
+          <BookList />
+        </>
+      )}
     </main>
   );
 }

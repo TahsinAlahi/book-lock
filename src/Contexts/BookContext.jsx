@@ -17,7 +17,7 @@ function reducer(state, action) {
         isLoading: true,
       };
     case "finishGettingBooks":
-      return { ...state, allBooks: action.payload, isLoading: false };
+      return { ...state, allBooks: [...action.payload], isLoading: false };
 
     default:
       throw new Error("unknown action type");
@@ -32,20 +32,23 @@ function BookProvider({ children }) {
     async function getAllBooks() {
       dispatch({ type: "gettingBooks" });
       let cachedStorage = sessionStorage.getItem("allBooks");
+
       try {
         if (cachedStorage) {
           cachedStorage = JSON.parse(cachedStorage);
+        } else {
+          const res = await fetch(
+            "https://openlibrary.org/trending/yearly.json"
+          );
+          const data = await res.json();
+          cachedStorage = data.works.slice(0, 15);
+          sessionStorage.setItem("allBooks", JSON.stringify(cachedStorage));
         }
 
-        const res = await fetch("https://openlibrary.org/trending/yearly.json");
-        const data = await res.json();
-        cachedStorage = data.works.slice(0, 15);
-        sessionStorage.setItem("allBooks", JSON.stringify(cachedStorage));
-
+        dispatch({ type: "finishGettingBooks", payload: cachedStorage });
         return cachedStorage;
       } catch (err) {
         console.error(err.message);
-      } finally {
         dispatch({ type: "finishGettingBooks", payload: cachedStorage });
       }
     }
