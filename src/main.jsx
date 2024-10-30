@@ -5,11 +5,14 @@ import App from "./App.jsx";
 
 import { RouterProvider } from "react-router-dom";
 import router from "./utils/routerRoutes.jsx";
+import { BookProvider } from "./Contexts/BookContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <BookProvider>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
+    </BookProvider>
   </StrictMode>
 );
