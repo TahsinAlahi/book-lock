@@ -1,25 +1,31 @@
 import { useState } from "react";
 import Loader from "./Loader";
+import defaultImg from "../assets/defaultImg.png";
 
 function BookCard({ book }) {
   const [isImgLoaded, setIsImgLoaded] = useState(false);
-  const coverImg = `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`;
+  const coverImg =
+    book.cover_edition_key === undefined
+      ? defaultImg
+      : `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`;
 
   return (
-    <div className="grid lg:grid-cols-2 gap-5 p-6 border-2 border-black/10 rounded-lg shadow-lg">
-      <div className="w-full h-fit">
+    <div className="grid lg:grid-cols-2 gap-5 p-6 border-2 border-black/10 rounded-lg shadow-lg ">
+      <div className="w-full h-full flex items-center justify-center">
         {!isImgLoaded && <Loader />}
         <img
           src={coverImg}
           alt={book.title}
-          className={`${isImgLoaded ? "block" : "hidden"} rounded-lg`}
+          className={`${
+            isImgLoaded ? "block" : "hidden"
+          } rounded-lg h-fit object-cover`}
           onLoad={() => setIsImgLoaded(true)}
         />
       </div>
 
       <div className=" flex items-start justify-around flex-col ">
         <div>
-          <h2 className="lg:text-2xl font-bold text-right lg:mb-1">
+          <h2 className="lg:text-2xl font-bold text-left lg:mb-1">
             {book.title}
           </h2>
           <p className="font-medium text-black/40">By: {book.author_name[0]}</p>
