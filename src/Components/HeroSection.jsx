@@ -4,7 +4,7 @@ import Loader from "./Loader";
 
 function HeroSection() {
   const { allBooks } = useBooks();
-  const [imgLoaded, setImgLoaded] = useState(false);
+  const [isImgLoaded, setIsImgLoaded] = useState(false);
 
   console.log(allBooks);
   if (!allBooks || allBooks.length === 0) return null;
@@ -24,14 +24,14 @@ function HeroSection() {
         </button>
       </div>
       <div className=" flex items-center justify-center lg:justify-end">
-        {!imgLoaded && <Loader />}
+        {!isImgLoaded && <Loader />}
         <img
           src={coverImg}
           alt={allBooks[0].title || "Book Cover"}
           className={`h-full max-w-fit rounded-xl ${
-            imgLoaded ? "block" : "hidden"
+            isImgLoaded ? "block" : "hidden"
           }`}
-          onLoad={() => setImgLoaded(true)}
+          onLoad={() => setIsImgLoaded(true)}
         />
       </div>
     </div>
