@@ -2,7 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="flex items-center justify-between lg:max-w-screen-lg lg:mx-auto lg:my-5">
+    <nav className="flex items-center justify-between w-full  lg:py-5">
       <Link to={"/"} className="text-2xl font-bold">
         Book Vibe
       </Link>
