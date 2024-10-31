@@ -2,6 +2,7 @@ import useAuthorInfo from "../Hooks/useAuthorInfo";
 
 function BookInfos({ book }) {
   const authorInfo = useAuthorInfo(book.authors[0].author.key);
+  console.log(book);
 
   return (
     <div className="flex flex-col items-start justify-center">
@@ -9,14 +10,14 @@ function BookInfos({ book }) {
         <h1 className="text-3xl font-bold lg:mb-3">{book.title}</h1>
         <p className="text-black/70">By: {authorInfo?.name}</p>
       </div>
-      <div className="flex items-start gap-2 py-4 border-y-2 border-gray-800/10 w-full">
+      <div className="flex items-start gap-2 py-4 border-y-2 border-gray-800/10 w-full mb-4">
         <p className="font-semibold">Tags:</p>
         {<Subjects subjects={book.subjects} />}
       </div>
       <p className="w-full pb-4 border-b-2 border-gray-800/10 lg:mb-8">
         <span className="font-semibold text-black">Description: </span>
         <span className="text-black/70">
-          {book.description || "No description"}
+          {book.description?.value || "No description"}
         </span>
       </p>
 
@@ -35,7 +36,6 @@ function BookInfos({ book }) {
 export default BookInfos;
 
 function Subjects({ subjects }) {
-  console.log(subjects);
   const subjectClasses =
     "px-3 py-2 bg-lime-400/40 text-lime-800 font-semibold rounded-lg capitalize";
   return (

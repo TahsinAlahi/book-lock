@@ -3,7 +3,7 @@ import CardBookImg from "./CardBookImg";
 
 function BookCard({ book }) {
   return (
-    <div className="grid lg:grid-cols-2 gap-5 p-6 border-2 border-black/10 rounded-lg shadow-lg ">
+    <div className="grid lg:grid-cols-2 gap-5 p-6 border-2 border-black/10 rounded-lg shadow-lg">
       <CardBookImg book={book} />
       <div className=" flex items-start justify-around flex-col ">
         <div>

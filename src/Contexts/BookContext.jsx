@@ -47,7 +47,7 @@ function BookProvider({ children }) {
           cachedStorage = JSON.parse(cachedStorage);
         } else {
           const res = await fetch(
-            "https://openlibrary.org/trending/yearly.json"
+            "https://openlibrary.org/trending/weekly.json"
           );
           const data = await res.json();
           cachedStorage = data.works.slice(0, 15);

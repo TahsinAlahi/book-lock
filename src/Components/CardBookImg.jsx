@@ -2,7 +2,7 @@ import { useState } from "react";
 import useBookImg from "../Hooks/useBookImg";
 import Loader from "./Loader";
 
-function CardBookImg({ book }) {
+function CardBookImg({ book, className = "" }) {
   const [isImgLoaded, setIsImgLoaded] = useState(false);
 
   const coverId = book?.cover_i ?? book?.covers?.[0];
@@ -16,7 +16,9 @@ function CardBookImg({ book }) {
   const coverImg = useBookImg(coverId);
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div
+      className={`w-full h-full flex items-center justify-center ${className}`}
+    >
       {!isImgLoaded && <Loader />}
       <img
         src={coverImg}
