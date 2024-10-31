@@ -6,7 +6,6 @@ function HeroSection() {
   const { allBooks } = useBooks();
   const [isImgLoaded, setIsImgLoaded] = useState(false);
 
-  console.log(allBooks);
   if (!allBooks || allBooks.length === 0) return null;
   const cover_key = allBooks[0].cover_edition_key;
 
