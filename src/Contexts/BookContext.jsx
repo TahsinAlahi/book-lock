@@ -7,6 +7,8 @@ const initState = {
   finishedBooks: [],
   wishListBooks: [],
   isLoading: false,
+  currentBook: {},
+  error: null,
 };
 
 function reducer(state, action) {
@@ -18,15 +20,22 @@ function reducer(state, action) {
       };
     case "finishGettingBooks":
       return { ...state, allBooks: [...action.payload], isLoading: false };
-
+    case "gettingBookDetails":
+      return { ...state, isLoading: true };
+    case "finishGettingBookDetails":
+      return { ...state, isLoading: false, currentBook: action.payload };
+    case "error":
+      return { ...state, isLoading: false, error: action.payload };
     default:
       throw new Error("unknown action type");
   }
 }
 
 function BookProvider({ children }) {
-  const [value, dispatch] = useReducer(reducer, initState);
-  // const { allBooks, finishedBooks, wishListBooks, isLoading } = value;
+  const [
+    { allBooks, finishedBooks, wishListBooks, isLoading, currentBook },
+    dispatch,
+  ] = useReducer(reducer, initState);
 
   useEffect(() => {
     async function getAllBooks() {
@@ -56,7 +65,34 @@ function BookProvider({ children }) {
     getAllBooks();
   }, []);
 
-  return <bookContext.Provider value={value}>{children}</bookContext.Provider>;
+  async function getBooks(book_key) {
+    dispatch({ type: "gettingBooks" });
+    const BookUrl = `https://openlibrary.org/works/${book_key}.json`;
+
+    try {
+      const res = await fetch(BookUrl);
+      const data = await res.json();
+      dispatch({ type: "finishGettingBookDetails", payload: data });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: "error", payload: err.message });
+    }
+  }
+
+  return (
+    <bookContext.Provider
+      value={{
+        allBooks,
+        finishedBooks,
+        wishListBooks,
+        isLoading,
+        currentBook,
+        getBooks,
+      }}
+    >
+      {children}
+    </bookContext.Provider>
+  );
 }
 
 function useBooks() {

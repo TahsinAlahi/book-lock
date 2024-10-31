@@ -1,20 +1,28 @@
 import { useParams } from "react-router-dom";
-import useBookDetails from "../Hooks/useBookDetails";
+// import useBookDetails from "../Hooks/useBookDetails";
 import Loader from "../Components/Loader";
 import CardBookImg from "../Components/CardBookImg";
+import BookInfo from "../Components/BookInfo";
+import { useBooks } from "../Contexts/BookContext";
+import { useEffect } from "react";
 
 function BookDetails() {
   const { book_key } = useParams();
-  const { bookDetails, isLoading } = useBookDetails(book_key);
-  console.log(bookDetails);
+  const { isLoading, currentBook, getBooks } = useBooks();
 
-  if (isLoading || Object.keys(bookDetails).length === 0) {
+  useEffect(() => {
+    getBooks(book_key);
+  }, [book_key]);
+
+  if (isLoading || Object.keys(currentBook).length === 0) {
     return <Loader />;
   }
 
+  console.log(currentBook);
   return (
-    <main>
-      <CardBookImg book={bookDetails} />
+    <main className="grid grid-cols-2 gap-5">
+      <CardBookImg book={currentBook} />
+      <BookInfo book={currentBook} />
     </main>
   );
 }
