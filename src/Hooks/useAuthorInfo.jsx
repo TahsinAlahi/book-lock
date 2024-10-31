@@ -5,10 +5,14 @@ function useAuthorInfo(authorKey) {
 
   useEffect(() => {
     async function getAuthorInfo() {
-      const res = await fetch(`https://openlibrary.org${authorKey}.json`);
-      const data = await res.json();
+      try {
+        const res = await fetch(`https://openlibrary.org${authorKey}.json`);
+        const data = await res.json();
 
-      setAuthorInfo(data);
+        setAuthorInfo(data);
+      } catch (err) {
+        console.log(err);
+      }
     }
     getAuthorInfo();
   }, [authorKey]);

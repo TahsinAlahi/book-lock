@@ -2,7 +2,7 @@ import useAuthorInfo from "../Hooks/useAuthorInfo";
 
 function BookInfos({ book }) {
   const authorInfo = useAuthorInfo(book.authors[0].author.key);
-  console.log(book);
+  console.log(authorInfo);
 
   return (
     <div className="flex flex-col items-start justify-center">
