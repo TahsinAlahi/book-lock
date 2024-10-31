@@ -17,7 +17,6 @@ function BookDetails() {
     return <Loader />;
   }
 
-  console.log(currentBook);
   return (
     <main className="grid grid-cols-2 gap-5">
       <CardBookImg book={currentBook} />
