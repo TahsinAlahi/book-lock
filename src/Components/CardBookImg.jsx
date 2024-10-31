@@ -4,7 +4,17 @@ import Loader from "./Loader";
 
 function CardBookImg({ book }) {
   const [isImgLoaded, setIsImgLoaded] = useState(false);
-  const coverImg = useBookImg(book.cover_edition_key);
+
+  const coverId = book?.cover_i ?? book?.covers?.[0];
+
+  // const coverId =
+  //   book?.cover_i ??
+  //   (Array.isArray(book?.covers) && book.covers.length > 0
+  //     ? book.covers[0]
+  //     : undefined);
+
+  const coverImg = useBookImg(coverId);
+
   return (
     <div className="w-full h-full flex items-center justify-center">
       {!isImgLoaded && <Loader />}

@@ -1,10 +1,10 @@
 import defaultImg from "../assets/defaultImg.png";
 
-function useBookImg(cover_edition_key) {
+function useBookImg(cover) {
   const coverImg =
-    cover_edition_key === undefined
+    cover === undefined || cover === null
       ? defaultImg
-      : `https://covers.openlibrary.org/b/olid/${cover_edition_key}-L.jpg`;
+      : `https://covers.openlibrary.org/b/id/${cover}-L.jpg`;
 
   return coverImg;
 }
