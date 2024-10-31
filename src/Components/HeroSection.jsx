@@ -12,7 +12,6 @@ function HeroSection() {
 
   const coverImg = `https://covers.openlibrary.org/b/olid/${cover_key}-L.jpg`;
 
-  console.log(coverImg);
   return (
     <div className="lg:w-full h-[calc(100dvh-88px)] grid lg:grid-cols-2 gap-8 items-center justify-between bg-slate-200/50 rounded-xl lg:px-20 lg:py-4 shadow-xl">
       <div className="flex items-start justify-between flex-col gap-5 lg:max-h-96 lg:h-1/2">

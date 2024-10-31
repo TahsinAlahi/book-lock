@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Loader from "./Loader";
 import defaultImg from "../assets/defaultImg.png";
+import { Link } from "react-router-dom";
 
 function BookCard({ book }) {
   const [isImgLoaded, setIsImgLoaded] = useState(false);
@@ -31,9 +32,12 @@ function BookCard({ book }) {
           <p className="font-medium text-black/40">By: {book.author_name[0]}</p>
         </div>
         <div className="flex flex-col w-full gap-3">
-          <button className="bg-lime-500 w-full py-2 border-2 border-gray-300 rounded-lg text-white font-semibold">
+          <Link
+            className="bg-lime-500 w-full py-2 border-2 border-gray-300 rounded-lg text-white font-semibold text-center"
+            to={`/book/${book.key.split("/")[2]}`}
+          >
             Details
-          </button>
+          </Link>
           <button className="bg-cyan-500 w-full py-2 border-2 border-gray-300 rounded-lg text-white font-semibold">
             Add To Wishlist
           </button>
