@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-// import useBookDetails from "../Hooks/useBookDetails";
 import Loader from "../Components/Loader";
 import CardBookImg from "../Components/CardBookImg";
 import BookInfo from "../Components/BookInfo";

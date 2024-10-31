@@ -21,7 +21,7 @@ function reducer(state, action) {
     case "finishGettingBooks":
       return { ...state, allBooks: [...action.payload], isLoading: false };
     case "gettingBookDetails":
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true, currentBook: {} };
     case "finishGettingBookDetails":
       return { ...state, isLoading: false, currentBook: action.payload };
     case "error":
