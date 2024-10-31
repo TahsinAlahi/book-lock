@@ -1,29 +1,10 @@
-import { useState } from "react";
-import Loader from "./Loader";
-import defaultImg from "../assets/defaultImg.png";
 import { Link } from "react-router-dom";
+import CardBookImg from "./CardBookImg";
 
 function BookCard({ book }) {
-  const [isImgLoaded, setIsImgLoaded] = useState(false);
-  const coverImg =
-    book.cover_edition_key === undefined
-      ? defaultImg
-      : `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`;
-
   return (
     <div className="grid lg:grid-cols-2 gap-5 p-6 border-2 border-black/10 rounded-lg shadow-lg ">
-      <div className="w-full h-full flex items-center justify-center">
-        {!isImgLoaded && <Loader />}
-        <img
-          src={coverImg}
-          alt={book.title}
-          className={`${
-            isImgLoaded ? "block" : "hidden"
-          } rounded-lg h-fit object-cover`}
-          onLoad={() => setIsImgLoaded(true)}
-        />
-      </div>
-
+      <CardBookImg book={book} />
       <div className=" flex items-start justify-around flex-col ">
         <div>
           <h2 className="lg:text-2xl font-bold text-left lg:mb-1">
