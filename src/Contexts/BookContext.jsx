@@ -24,6 +24,11 @@ function reducer(state, action) {
       return { ...state, isLoading: true, currentBook: {} };
     case "finishGettingBookDetails":
       return { ...state, isLoading: false, currentBook: action.payload };
+    case "addFinishedBook":
+      return {
+        ...state,
+        finishedBooks: [...state.finishedBooks, action.payload],
+      };
     case "error":
       return { ...state, isLoading: false, error: action.payload };
     default:
@@ -79,6 +84,14 @@ function BookProvider({ children }) {
     }
   }
 
+  function addFinishedBook(book) {
+    const doesExist = finishedBooks.find((b) => b.key === book.key);
+
+    if (!doesExist) {
+      dispatch({ type: "addFinishedBook", payload: book });
+    }
+  }
+
   return (
     <bookContext.Provider
       value={{
@@ -88,6 +101,7 @@ function BookProvider({ children }) {
         isLoading,
         currentBook,
         getBooks,
+        addFinishedBook,
       }}
     >
       {children}

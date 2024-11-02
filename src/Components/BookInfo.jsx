@@ -1,8 +1,9 @@
 import useAuthorInfo from "../Hooks/useAuthorInfo";
+import { useBooks } from "../Contexts/BookContext";
 
 function BookInfos({ book }) {
   const authorInfo = useAuthorInfo(book.authors[0].author.key);
-  console.log(authorInfo);
+  const { addFinishedBook } = useBooks();
 
   return (
     <div className="flex flex-col items-start justify-center">
@@ -22,7 +23,10 @@ function BookInfos({ book }) {
       </p>
 
       <div className="flex items-center gap-3 font-semibold">
-        <button className="border-2 border-black/30 px-4 py-2 rounded-lg">
+        <button
+          className="border-2 border-black/30 px-4 py-2 rounded-lg"
+          onClick={() => addFinishedBook(book)}
+        >
           Read
         </button>
         <button className="border-2 bg-cyan-600 border-cyan-600 px-4 py-2 rounded-lg text-white">
@@ -40,7 +44,7 @@ function Subjects({ subjects }) {
     "px-3 py-2 bg-lime-400/40 text-lime-800 font-semibold rounded-lg capitalize";
   return (
     <div className=" flex items-center gap-2 flex-wrap">
-      {subjects.map((subject, i) => {
+      {subjects?.map((subject, i) => {
         return subject.split(" ").length === 1 ? (
           <div key={i} className={subjectClasses}>
             {subject}
