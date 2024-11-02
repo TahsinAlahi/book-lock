@@ -26,6 +26,10 @@ const router = createBrowserRouter([
         path: "linked-books",
         element: <LinkedPage />,
       },
+      {
+        path: "*",
+        element: <ErrorPage />,
+      },
     ],
   },
 ]);
